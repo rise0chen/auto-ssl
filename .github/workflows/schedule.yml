@@ -1,0 +1,25 @@
+name: Get SSL License
+run-name: Update License
+on: 
+  workflow_dispatch: 
+  schedule: 
+    - cron: '0 14 1 * *'
+  
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup GO
+        uses: actions/setup-go@v4.0.0
+        with: 
+           go-version: 1.20.3
+
+      - name: Execute
+        env:
+          RAM_ROLE: ${{ secrets.RAM_ROLE }}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
+        run: go run main.go
