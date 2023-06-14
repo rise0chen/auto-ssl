@@ -1,4 +1,4 @@
-module LeCA
+module lebai.ltd/auto_ssl
 
 go 1.20
 
