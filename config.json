@@ -1,0 +1,75 @@
+{
+    "dns": {
+        "aliyun": {
+            "accessKey": "***",
+            "secretKey": "***"
+        }
+    },
+    "cert": {
+        "email": "opensoft@lebai.ltd",
+        "domain": [
+            "lebai.ltd",
+            "*.lebai.ltd"
+        ]
+    },
+    "deployment": {
+        "aliyun": {
+            "accessKey": "***",
+            "secretKey": "***",
+            "region": "cn-shanghai",
+            "oss": {
+                "list": [
+                    {
+                        "bucket": "l-os",
+                        "domain": "l-os.lebai.ltd"
+                    },
+                    {
+                        "bucket": "l-doc",
+                        "domain": "l-doc.lebai.ltd"
+                    },
+                    {
+                        "bucket": "l-cloud-shop",
+                        "domain": "l-cloud-shop.lebai.ltd"
+                    },
+                    {
+                        "bucket": "l-cloud-shop",
+                        "domain": "shop.lebai.ltd"
+                    },
+                    {
+                        "bucket": "l-software",
+                        "domain": "l-software.lebai.ltd"
+                    },
+                    {
+                        "bucket": "l-www",
+                        "domain": "l-www.lebai.ltd"
+                    }
+                ]
+            }
+        },
+        "k8s": {
+            "kube": "***",
+            "secrets": [
+                {
+                    "namespace": "www",
+                    "name": "lebai.ltd-tls"
+                },
+                {
+                    "namespace": "cloud",
+                    "name": "lebai.ltd-tls"
+                },
+                {
+                    "namespace": "cfqmp",
+                    "name": "lebai.ltd-tls"
+                },
+                {
+                    "namespace": "default",
+                    "name": "lebai.ltd-tls"
+                },
+                {
+                    "namespace": "docs",
+                    "name": "lebai.ltd-tls"
+                }
+            ]
+        }
+    }
+}

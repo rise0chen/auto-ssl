@@ -20,4 +20,7 @@ jobs:
       - name: Execute
         env:
           CONFIG: ${{ secrets.CONFIG }}
+          ALIYUN_ACCESSKEY: ${{ secrets.ALIYUN_ACCESSKEY }}
+          ALIYUN_SECRETKET: ${{ secrets.ALIYUN_SECRETKET }}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         run: go run main.go
