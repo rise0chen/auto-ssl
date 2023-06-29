@@ -58,7 +58,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	certificate, err := cert.GetCertificate(user, dnsProvider, config.Cert.Domain)
+	certificate, err := cert.GetCertificate(user, dnsProvider, config.Cert.Domain, config.Cert.Test)
 	if err != nil {
 		log.Fatal(err)
 	}

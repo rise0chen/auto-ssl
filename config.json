@@ -6,6 +6,7 @@
         }
     },
     "cert": {
+        "test": true,
         "email": "opensoft@lebai.ltd",
         "domain": [
             "lebai.ltd",
@@ -30,10 +31,6 @@
                     {
                         "bucket": "l-cloud-shop",
                         "domain": "l-cloud-shop.lebai.ltd"
-                    },
-                    {
-                        "bucket": "l-cloud-shop",
-                        "domain": "shop.lebai.ltd"
                     },
                     {
                         "bucket": "l-software",
@@ -63,10 +60,6 @@
                 },
                 {
                     "namespace": "default",
-                    "name": "lebai.ltd-tls"
-                },
-                {
-                    "namespace": "docs",
                     "name": "lebai.ltd-tls"
                 }
             ]

@@ -9,6 +9,7 @@ import (
 )
 
 type CertConfig struct {
+	Test   bool     `json:"test"`
 	Email  string   `json:"email"`
 	Domain []string `json:"domain"`
 }
@@ -18,8 +19,13 @@ type Certificate struct {
 	Private string
 }
 
-func GetCertificate(user User, dns challenge.Provider, domain []string) (Certificate, error) {
+func GetCertificate(user User, dns challenge.Provider, domain []string, test bool) (Certificate, error) {
 	config := lego.NewConfig(&user)
+	if test {
+		config.CADirURL = lego.LEDirectoryStaging
+	} else {
+		config.CADirURL = lego.LEDirectoryProduction
+	}
 
 	// This CA URL is configured for a local dev instance of Boulder running in Docker in a VM.
 	// config.CADirURL = "https://acme-staging-v02.api.letsencrypt.org/directory"
