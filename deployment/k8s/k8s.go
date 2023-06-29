@@ -43,8 +43,11 @@ func DeploymentK8s(config K8sConfig, certificate cert.Certificate) error {
 	for _, item := range config.Secrets {
 		secret.ObjectMeta.Namespace = item.Namespace
 		secret.ObjectMeta.Name = item.Name
+		secretClient := clientset.CoreV1().Secrets(item.Namespace)
+		// 删除保密字典
+		err := secretClient.Delete(context.Background(), item.Name, metav1.DeleteOptions{})
 		// 创建保密字典
-		_, err := clientset.CoreV1().Secrets(item.Namespace).Create(context.Background(), &secret, metav1.CreateOptions{})
+		_, err = secretClient.Create(context.Background(), &secret, metav1.CreateOptions{})
 		if err != nil {
 			return err
 		}
