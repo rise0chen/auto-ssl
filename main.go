@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 
 	"encoding/json"
 
@@ -29,20 +30,20 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Println(config)
-	if config.Dns.Aliyun.AccessKey == "***" {
-		config.Dns.Aliyun.AccessKey = os.Getenv("ALIYUN_ACCESSKEY")
+	if strings.HasPrefix(config.Dns.Aliyun.AccessKey, "***") {
+		config.Dns.Aliyun.AccessKey = os.Getenv("ALIYUN_ACCESSKEY" + config.Dns.Aliyun.AccessKey[3:])
 	}
-	if config.Dns.Aliyun.SecretKey == "***" {
-		config.Dns.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET")
+	if strings.HasPrefix(config.Dns.Aliyun.SecretKey, "***") {
+		config.Dns.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET" + config.Dns.Aliyun.SecretKey[3:])
 	}
-	if config.Deployment.Aliyun.AccessKey == "***" {
-		config.Deployment.Aliyun.AccessKey = os.Getenv("ALIYUN_ACCESSKEY")
+	if strings.HasPrefix(config.Deployment.Aliyun.AccessKey, "***") {
+		config.Deployment.Aliyun.AccessKey = os.Getenv("ALIYUN_ACCESSKEY" + config.Deployment.Aliyun.AccessKey[3:])
 	}
-	if config.Deployment.Aliyun.SecretKey == "***" {
-		config.Deployment.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET")
+	if strings.HasPrefix(config.Deployment.Aliyun.SecretKey, "***") {
+		config.Deployment.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET" + config.Deployment.Aliyun.SecretKey[3:])
 	}
-	if config.Deployment.K8s.Kube == "***" {
-		config.Deployment.K8s.Kube = os.Getenv("KUBE_CONFIG")
+	if strings.HasPrefix(config.Deployment.K8s.Kube, "***") {
+		config.Deployment.K8s.Kube = os.Getenv("KUBE_CONFIG" + config.Deployment.K8s.Kube[3:])
 	}
 
 	var dnsProvider challenge.Provider

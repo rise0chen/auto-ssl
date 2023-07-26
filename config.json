@@ -29,10 +29,6 @@
                         "domain": "l-doc.lebai.ltd"
                     },
                     {
-                        "bucket": "l-cloud-shop",
-                        "domain": "l-cloud-shop.lebai.ltd"
-                    },
-                    {
                         "bucket": "l-software",
                         "domain": "l-software.lebai.ltd"
                     },
