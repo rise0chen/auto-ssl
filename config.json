@@ -33,6 +33,10 @@
                         "domain": "l-software.lebai.ltd"
                     },
                     {
+                        "bucket": "l-cloud-shop",
+                        "domain": "shop.oss.lebai.ltd"
+                    },
+                    {
                         "bucket": "l-www",
                         "domain": "l-www.lebai.ltd"
                     }
