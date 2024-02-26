@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"time"
 
 	alidns "github.com/alibabacloud-go/alidns-20150109/v4/client"
 	openapi "github.com/alibabacloud-go/darabonba-openapi/v2/client"
@@ -45,12 +46,12 @@ func (ali *AliyunDns) AddRecord(domain, rr, r_type, value string) {
 }
 
 func (ali *AliyunDns) Present(domain, token, keyAuth string) error {
-	fqdn, value := dns01.GetRecord(domain, keyAuth)
-	rr, success := strings.CutSuffix(fqdn, "."+domain+".")
+	info := dns01.GetChallengeInfo(domain, keyAuth)
+	rr, success := strings.CutSuffix(info.FQDN, "."+domain+".")
 	if !success {
-		return fmt.Errorf("no such suffix: %s", fqdn)
+		return fmt.Errorf("no such suffix: %s", info)
 	}
-	ali.AddRecord(domain, rr, "TXT", value)
+	ali.AddRecord(domain, rr, "TXT", info.Value)
 	return nil
 }
 
@@ -63,4 +64,8 @@ func (ali *AliyunDns) CleanUp(domain, token, keyAuth string) error {
 	}
 	ali.ID = make([]string, 0)
 	return nil
+}
+
+func (ali *AliyunDns) Timeout() (timeout, interval time.Duration) {
+	return 12 * time.Minute, 10 * time.Second
 }
