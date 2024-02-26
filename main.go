@@ -47,12 +47,15 @@ func main() {
 	}
 
 	var dnsProvider challenge.Provider
-	if config.Dns.Aliyun.AccessKey != "" {
+	if config.Dns.Aliyun.AccessKey != "" && !strings.HasPrefix(config.Dns.Aliyun.AccessKey, "***") {
 		dns, err := dns.NewAliyunDns(config.Dns.Aliyun)
 		if err != nil {
 			log.Fatal(err)
 		}
 		dnsProvider = &dns
+	} else {
+		log.Fatal("No DNS Provider")
+		return
 	}
 
 	user, err := cert.NewUser(config.Cert.Email)
