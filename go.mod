@@ -8,12 +8,14 @@ require (
 	github.com/alibabacloud-go/darabonba-openapi/v2 v2.0.4
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.7+incompatible
 	github.com/go-acme/lego/v4 v4.15.0
+	github.com/qiniu/go-sdk/v7 v7.21.1
 	k8s.io/api v0.27.2
 	k8s.io/apimachinery v0.27.2
 	k8s.io/client-go v0.27.2
 )
 
 require (
+	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/alibabacloud-go/alibabacloud-gateway-spi v0.0.4 // indirect
 	github.com/alibabacloud-go/debug v0.0.0-20190504072949-9472017b5c68 // indirect
 	github.com/alibabacloud-go/endpoint-util v1.1.0 // indirect

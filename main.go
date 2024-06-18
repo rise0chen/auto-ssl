@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -13,6 +14,7 @@ import (
 	"lebai.ltd/auto_ssl/deployment"
 	"lebai.ltd/auto_ssl/deployment/aliyun"
 	"lebai.ltd/auto_ssl/deployment/k8s"
+	"lebai.ltd/auto_ssl/deployment/qiniu"
 	"lebai.ltd/auto_ssl/dns"
 )
 
@@ -24,6 +26,12 @@ type Config struct {
 
 func main() {
 	configStr := os.Getenv("CONFIG")
+	if len(configStr) == 0 {
+		data, err := ioutil.ReadFile("config.json")
+		if err == nil {
+			configStr = string(data)
+		}
+	}
 	config := Config{}
 	err := json.Unmarshal([]byte(configStr), &config)
 	if err != nil {
@@ -53,6 +61,12 @@ func main() {
 			log.Fatal(err)
 		}
 		dnsProvider = &dns
+	} else if config.Dns.Vercel.AuthToken != "" && !strings.HasPrefix(config.Dns.Vercel.AuthToken, "***") {
+		dns, err := dns.NewVercelDns(config.Dns.Vercel)
+		if err != nil {
+			log.Fatal(err)
+		}
+		dnsProvider = &dns
 	} else {
 		log.Fatal("No DNS Provider")
 		return
@@ -62,13 +76,19 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	certificate, err := cert.GetCertificate(user, dnsProvider, config.Cert.Domain, config.Cert.Test)
+	certificate, err := cert.GetCertificate(user, dnsProvider, config.Cert)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if config.Deployment.Aliyun.AccessKey != "" {
 		err := aliyun.DeploymentAliyun(config.Deployment.Aliyun, certificate)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	if config.Deployment.Qiniu.AccessKey != "" {
+		err := qiniu.DeploymentQiniu(config.Deployment.Qiniu, certificate)
 		if err != nil {
 			log.Fatal(err)
 		}

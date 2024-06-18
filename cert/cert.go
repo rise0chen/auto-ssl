@@ -15,13 +15,14 @@ type CertConfig struct {
 }
 
 type Certificate struct {
+	Config  CertConfig
 	Public  string
 	Private string
 }
 
-func GetCertificate(user User, dns challenge.Provider, domain []string, test bool) (Certificate, error) {
+func GetCertificate(user User, dns challenge.Provider, cfg CertConfig) (Certificate, error) {
 	config := lego.NewConfig(&user)
-	if test {
+	if cfg.Test {
 		config.CADirURL = lego.LEDirectoryStaging
 	} else {
 		config.CADirURL = lego.LEDirectoryProduction
@@ -54,7 +55,7 @@ func GetCertificate(user User, dns challenge.Provider, domain []string, test boo
 	user.Registration = reg
 
 	request := certificate.ObtainRequest{
-		Domains: domain,
+		Domains: cfg.Domain,
 		Bundle:  true,
 	}
 	certificates, err := client.Certificate.Obtain(request)
@@ -66,6 +67,7 @@ func GetCertificate(user User, dns challenge.Provider, domain []string, test boo
 	// private key, and a certificate URL. SAVE THESE TO DISK.
 	// fmt.Printf("%#v\n", certificates)
 	return Certificate{
+		Config:  cfg,
 		Public:  string(certificates.Certificate),
 		Private: string(certificates.PrivateKey),
 	}, nil
