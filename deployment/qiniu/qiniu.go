@@ -11,7 +11,6 @@ import (
 type QiniuConfig struct {
 	AccessKey string `json:"accessKey"`
 	SecretKey string `json:"secretKey"`
-	Region    string `json:"region"`
 
 	Oss OssConfig `json:"oss"`
 }

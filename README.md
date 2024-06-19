@@ -1,0 +1,8 @@
+# auto-ssl
+
+## env
+
+- aliyun: `ALIYUN_ACCESSKEY`,`ALIYUN_SECRETKET`
+- k8s: `KUBE_CONFIG`
+- vercel: `VERCEL_AUTHTOKEN`,`VERCEL_TEAMID`
+- qiniu: `QINIU_ACCESSKEY`,`QINIU_SECRETKET`

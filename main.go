@@ -44,11 +44,23 @@ func main() {
 	if strings.HasPrefix(config.Dns.Aliyun.SecretKey, "***") {
 		config.Dns.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET" + config.Dns.Aliyun.SecretKey[3:])
 	}
+	if strings.HasPrefix(config.Dns.Vercel.AuthToken, "***") {
+		config.Dns.Vercel.AuthToken = os.Getenv("VERCEL_AUTHTOKEN" + config.Dns.Vercel.AuthToken[3:])
+	}
+	if strings.HasPrefix(config.Dns.Vercel.TeamID, "***") {
+		config.Dns.Vercel.TeamID = os.Getenv("VERCEL_TEAMID" + config.Dns.Vercel.TeamID[3:])
+	}
 	if strings.HasPrefix(config.Deployment.Aliyun.AccessKey, "***") {
 		config.Deployment.Aliyun.AccessKey = os.Getenv("ALIYUN_ACCESSKEY" + config.Deployment.Aliyun.AccessKey[3:])
 	}
 	if strings.HasPrefix(config.Deployment.Aliyun.SecretKey, "***") {
 		config.Deployment.Aliyun.SecretKey = os.Getenv("ALIYUN_SECRETKET" + config.Deployment.Aliyun.SecretKey[3:])
+	}
+	if strings.HasPrefix(config.Deployment.Qiniu.AccessKey, "***") {
+		config.Deployment.Qiniu.AccessKey = os.Getenv("QINIU_ACCESSKEY" + config.Deployment.Qiniu.AccessKey[3:])
+	}
+	if strings.HasPrefix(config.Deployment.Qiniu.SecretKey, "***") {
+		config.Deployment.Qiniu.SecretKey = os.Getenv("QINIU_SECRETKET" + config.Deployment.Qiniu.SecretKey[3:])
 	}
 	if strings.HasPrefix(config.Deployment.K8s.Kube, "***") {
 		config.Deployment.K8s.Kube = os.Getenv("KUBE_CONFIG" + config.Deployment.K8s.Kube[3:])
