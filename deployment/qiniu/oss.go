@@ -14,10 +14,10 @@ type OssItem struct {
 
 func DeploymentOss(qiniu QiniuDeployment, config OssConfig) error {
 	for _, item := range config.List {
-		req := map[string]string{
+		req := map[string]interface{}{
 			"certId":      qiniu.CertId,
-			"forceHttps":  "false",
-			"http2Enable": "true",
+			"forceHttps":  false,
+			"http2Enable": true,
 		}
 		uri := fmt.Sprintf("/domain/%s/httpsconf", item.Domain)
 		resData, _ := request(qiniu.Client, "PUT", uri, req)
